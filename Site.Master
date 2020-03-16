@@ -1,0 +1,68 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="Agent_Management.SiteMaster" %>
+
+<!DOCTYPE html>
+
+
+<html lang="en">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%: Page.Title %> Agent Management</title>
+    <link href="Content/bootstrap.css" rel="stylesheet" />
+    <link href="Content/Site.css" rel="stylesheet" />
+    <script src="Scripts/jquery-3.3.1.js"></script>
+
+</head>
+<body>
+    <form runat="server">
+        <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+        <div class="navbar navbar-expand-lg navbar-inverse navbar-fixed-top">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" runat="server" href="~/">Agents</a>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a runat="server" href="~/">Home</a></li>
+                        <li><a runat="server" href="~/Relation.aspx">Company-Agent</a></li>
+                        <li><a runat="server" href="~/Matter/Company_View.aspx">Company</a></li>
+                        <li><a runat="server" href="~/Matter/Agent_View.aspx">Agent</a></li>
+                        
+                    </ul>
+                    <asp:LoginView runat="server" ViewStateMode="Disabled">
+                        <AnonymousTemplate>
+                            <ul class="nav navbar-nav navbar-right">
+                                <li><a runat="server" href="~/Account/Register.aspx">Register</a></li>
+                                <li><a runat="server" href="~/Account/Login.aspx">Login</a></li>
+                            </ul>
+                        </AnonymousTemplate>
+                        <LoggedInTemplate>
+                            <ul class="nav navbar-nav navbar-right">
+<%--                                <li><a runat="server" href="~/Account/Manage" title="Manage your account">Hello, <%: Context.User.Identity.GetUserName()  %> !</a></li>--%>
+                                <li>
+                                    <asp:LinkButton ID="LinkButton1" runat="server" OnClick="LinkButton1_Click" >Logout</asp:LinkButton>
+                                </li>
+                            </ul>
+                        </LoggedInTemplate>
+                    </asp:LoginView>
+                </div>
+            </div>
+        </div>
+        <div class="container body-content">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server">
+            </asp:ContentPlaceHolder>
+            <hr />
+            <footer>
+                <p>&copy; <%: DateTime.Now.Year %> - Agent Management Application</p>
+            </footer>
+        </div>
+    </form>
+    <script src="Scripts/bootstrap.js"></script>
+</body>
+</html>
+

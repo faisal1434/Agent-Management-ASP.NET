@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Database1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Agent">
+    <Key>
+      <PropertyRef Name="AgentId" />
+    </Key>
+    <Property Name="AgentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AgentName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ContactNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Companies" Relationship="Self.FK__Company__AgentId__2E1BDC42" FromRole="Agents" ToRole="Company" />
+  </EntityType>
+  <EntityType Name="Company">
+    <Key>
+      <PropertyRef Name="CompanyId" />
+    </Key>
+    <Property Name="CompanyId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CompanyName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Address" Type="String" MaxLength="120" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="AgentId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Agent" Relationship="Self.FK__Company__AgentId__2E1BDC42" FromRole="Company" ToRole="Agents" />
+  </EntityType>
+  <Association Name="FK__Company__AgentId__2E1BDC42">
+    <End Role="Agents" Type="Self.Agent" Multiplicity="1" />
+    <End Role="Company" Type="Self.Company" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Agents">
+        <PropertyRef Name="AgentId" />
+      </Principal>
+      <Dependent Role="Company">
+        <PropertyRef Name="AgentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="AgentDbContext" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Agents" EntityType="Self.Agent" />
+    <EntitySet Name="Companies" EntityType="Self.Company" />
+    <AssociationSet Name="FK__Company__AgentId__2E1BDC42" Association="Self.FK__Company__AgentId__2E1BDC42">
+      <End Role="Agents" EntitySet="Agents" />
+      <End Role="Company" EntitySet="Companies" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

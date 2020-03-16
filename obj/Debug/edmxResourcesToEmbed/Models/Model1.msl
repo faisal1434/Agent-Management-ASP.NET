@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Database1ModelStoreContainer" CdmEntityContainer="AgentDbContext">
+    <EntitySetMapping Name="Agents">
+      <EntityTypeMapping TypeName="Database1Model.Agent">
+        <MappingFragment StoreEntitySet="Agents">
+          <ScalarProperty Name="AgentId" ColumnName="AgentId" />
+          <ScalarProperty Name="AgentName" ColumnName="AgentName" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="ContactNumber" ColumnName="ContactNumber" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Companies">
+      <EntityTypeMapping TypeName="Database1Model.Company">
+        <MappingFragment StoreEntitySet="Company">
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+          <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="AgentId" ColumnName="AgentId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

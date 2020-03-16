@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Database1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Agents">
+    <Key>
+      <PropertyRef Name="AgentId" />
+    </Key>
+    <Property Name="AgentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AgentName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="ContactNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Company">
+    <Key>
+      <PropertyRef Name="CompanyId" />
+    </Key>
+    <Property Name="CompanyId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CompanyName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Address" Type="nvarchar" MaxLength="120" Nullable="false" />
+    <Property Name="AgentId" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__Company__AgentId__2E1BDC42">
+    <End Role="Agents" Type="Self.Agents" Multiplicity="1" />
+    <End Role="Company" Type="Self.Company" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Agents">
+        <PropertyRef Name="AgentId" />
+      </Principal>
+      <Dependent Role="Company">
+        <PropertyRef Name="AgentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Database1ModelStoreContainer">
+    <EntitySet Name="Agents" EntityType="Self.Agents" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Company__AgentId__2E1BDC42" Association="Self.FK__Company__AgentId__2E1BDC42">
+      <End Role="Agents" EntitySet="Agents" />
+      <End Role="Company" EntitySet="Company" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
